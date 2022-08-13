@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Team;
+use App\Models\Plan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class TeamController extends Controller
+class PlanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +20,9 @@ class TeamController extends Controller
     public function index()
     {
         //
-        $data = Team::all();
-        return response()->view('dashboard.team.index',[
-            'datas' =>$data,
+        $data = Plan::all();
+        return response()->view('dashboard.plan.index', [
+            'datas' => $data,
         ]);
     }
 
@@ -33,7 +34,8 @@ class TeamController extends Controller
     public function create()
     {
         //
-        return response()->view('dashboard.team.create');
+        return response()->view('dashboard.plan.create');
+
     }
 
     /**
@@ -46,27 +48,25 @@ class TeamController extends Controller
     {
         //
         $validator = Validator($request->all(), [
-            'name' => 'required|string|min:3|max:45',
-            'image' => 'required',
-            'team' => 'required',
-            'position' => 'required',
+            'title' => 'required|string|min:3|max:45',
+            'file' => 'required|mimes:pdf'
         ]);
         if (!$validator->fails()) {
 
 
-            $team = new Team();
-            $team->name = $request->input('name');
-            $team->team = $request->input('team');
-            $team->position = $request->input('position');
+            $plan = new Plan();
+            $plan->title = $request->input('title');
 
 
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $team->name . '.' . $image->getClientOriginalExtension();
-                $request->file('image')->storeAs('/teams', $imageName, ['disk' => 'public']);
-                $team->image = 'teams/' . $imageName;
+
+
+            if ($request->hasFile('file')) {
+                $image = $request->file('file');
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $plan->title . '.' . $image->getClientOriginalExtension();
+                $request->file('file')->storeAs('/plans', $imageName, ['disk' => 'public']);
+                $plan->file = 'plans/' . $imageName;
             }
-            $isSaved = $team->save();
+            $isSaved = $plan->save();
             return response()->json([
                 'message' => $isSaved ? 'Created successfully' : 'Create Failed'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -80,10 +80,10 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function show(Team $team)
+    public function show(Plan $plan)
     {
         //
     }
@@ -91,13 +91,13 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Team $team)
+    public function edit(Plan $plan)
     {
         //
-        return response()->view('dashboard.team.edit', compact('team'));
+        return response()->view('dashboard.plan.edit',compact('plan'));
 
     }
 
@@ -105,34 +105,29 @@ class TeamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, Plan $plan)
     {
         //
         $validator = Validator($request->all(), [
-            'name' => 'required|string|min:3|max:45',
-            'image' => 'required',
-            'team' => 'required',
-            'position' => 'required',
+            'title' => 'required|string|min:3|max:45',
+            'file' => 'required|mimes:pdf'
         ]);
         if (!$validator->fails()) {
 
 
 
-            $team->name = $request->input('name');
-            $team->team = $request->input('team');
-            $team->position = $request->input('position');
+            $plan->title = $request->input('title');
 
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $team->name . '.' . $image->getClientOriginalExtension();
-                $request->file('image')->storeAs('/teams', $imageName, ['disk' => 'public']);
-                $team->image = 'teams/' . $imageName;
+            if ($request->hasFile('file')) {
+                $image = $request->file('file');
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $plan->title . '.' . $image->getClientOriginalExtension();
+                $request->file('file')->storeAs('/plans', $imageName, ['disk' => 'public']);
+                $plan->file = 'plans/' . $imageName;
             }
-            $isSaved = $team->save();
+            $isSaved = $plan->save();
             return response()->json([
                 'message' => $isSaved ? 'Created successfully' : 'Create Failed'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -146,11 +141,18 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Team $team)
+    public function destroy(Plan $plan)
     {
         //
+        $imageName = $plan->value;
+        $deleted = $plan->delete();
+        if ($deleted) Storage::disk('public')->delete($imageName);
+        return response()->json([
+            'title' => $deleted ? 'تم الحذف بنجاح' : "فشل الحذف",
+            'icon' => $deleted ? 'success' : "error",
+        ], $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 }

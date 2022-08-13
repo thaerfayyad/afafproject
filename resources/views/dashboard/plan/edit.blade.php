@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'الخطط  ' )
+@section('title', 'قوائم الماليا' )
 @section('css')
 @section('content')
 
@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>اضافة قائمة جمعية عمومية جديدة</h2>
+                                            <h2>اضافة قائمة ماليا</h2>
                                         </div>
                                     </div>
 
@@ -36,14 +36,14 @@
                                             <div class="col-md-4 col-sm-12 mt-8">
 
                                                 <label for="title" class="form-label required"> العنوان  </label>
-                                                <input type="text" class="form-control form-control-solid" id="title"
+                                                <input type="text" class="form-control form-control-solid" value="{{ $plan->title }}" id="title"
                                                     name="title">
-                                            </div>
 
+                                            </div>
                                             <div class="col-md-4 col-sm-12 mt-8">
 
                                                 <label for="file" class="form-label required"> الملف المرفق</label>
-                                                <input type="file" class="form-control form-control-solid" id="file"
+                                                <input type="file" class="form-control form-control-solid" value="{{ $plan->file }}" id="file"
                                                     name="file">
 
                                             </div>
@@ -69,7 +69,7 @@
                         <!--begin::Button-->
 
 
-                        <button type="button" onclick="store()" class="btn btn-primary">
+                        <button type="button" onclick="update('{{$plan->id}}')" class="btn btn-primary">
                             <span class="indicator-label">حفظ</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -107,14 +107,13 @@
         });
     </script>
     <script>
-        function store() {
+        function update(id) {
             let formData = new FormData($('#create-form')[0]);
-            axios.post('/dashboard/publicAssociations', formData, {
-            }).then(function (response) {
+            formData.append('_method','PUT');
+            axios.post('/dashboard/plans/'+id, formData).then(function (response) {
                 console.log(response);
                 toastr.success(response.data.message);
-                document.getElementById('create-form').reset();
-                // window.location.href = '/dashboard/settings/';
+                window.location.href = '/dashboard/plans/';
             }).catch(function (error) {
 
                 let messages = '';

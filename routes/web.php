@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Dashboard\AchievementController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\FinanciallyController;
 use App\Http\Controllers\Dashboard\MeetingController;
+use App\Http\Controllers\Dashboard\NewsController;
 use App\Http\Controllers\Dashboard\PublicAssociationController;
 use App\Http\Controllers\Dashboard\TeamController;
+use App\Http\Controllers\Dashboard\PlanController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -36,19 +39,26 @@ Route::get('/xx', function () {
     return view('front.adminsrations');
 })->name('adminsrations');
 
-Route::prefix('dashboard')->group(function() {
 
-    Route::get('/', function () {
-        return view('dashboard.index');
-    });
 
-    Route::get('publicAssociation-create', [PublicAssociationController::class, 'create'])->name('publicAssociation.create');
-    Route::post('publicAssociation-store', [PublicAssociationController::class, 'store'])->name('publicAssociation.store');
-    Route::get('publicAssociation-index', [PublicAssociationController::class, 'index'])->name('publicAssociation.index');
+Route::prefix('dashboard')->middleware('guest:admin')->group(function () {
 
+    Route::get('login',[AuthController::class, 'showLogin'])->name('auth.login-show');
+    Route::post('login',[AuthController::class, 'login'])->name('auth.login');
+});
+Route::prefix('dashboard')->middleware('auth:admin') ->group(function () {
+
+
+    Route::get('/', function () {  return view('dashboard.index');  })->name('dashboard.home');
+
+
+    Route::resource('publicAssociations',  PublicAssociationController::class);
     Route::resource('teams',  TeamController::class);
     Route::resource('meetings',  MeetingController::class);
     Route::resource('financiallies',  FinanciallyController::class);
+    Route::resource('plans',  PlanController::class);
+    Route::resource('achievements',  AchievementController::class);
+    Route::resource('news',  NewsController::class);
 
 
 

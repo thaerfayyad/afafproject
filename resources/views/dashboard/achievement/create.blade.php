@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>اضافة قائمة جمعية عمومية جديدة</h2>
+                                            <h2>اضافة قائمة ماليا</h2>
                                         </div>
                                     </div>
 
@@ -109,7 +109,7 @@
     <script>
         function store() {
             let formData = new FormData($('#create-form')[0]);
-            axios.post('/dashboard/publicAssociations', formData, {
+            axios.post('/dashboard/achievements', formData, {
             }).then(function (response) {
                 console.log(response);
                 toastr.success(response.data.message);

@@ -26,9 +26,9 @@
                                     <th> الرقم # </th>
                                     <th>الصورة</th>
                                     <th>الاسم</th>
-                                    <th> المرفق  </th>
-
+                                    <th> المرفق </th>
                                     <th>أنشئ بتاريخ</th>
+                                    <th>العماليات</th>
 
                                 </tr>
                             </thead>
@@ -37,14 +37,23 @@
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
                                         <td>
-                                            <img src="{{ $data->image_path }}" alt=""  width="150px">
+                                            <img src="{{ $data->image_path }}" alt="" width="150px">
                                         </td>
 
 
-                                        <td>{{$data ->title }}</td>
-                                        <td> <a href="#"> الملف المرفق</a></td>
+                                        <td>{{ $data->title }}</td>
+                                        <td> <a href="{{ $data->file_path }} " target="_blank"> الملف المرفق</a></td>
 
-                                        <td>{{ $data->created_at->diffForHumans()}}</td>
+                                        <td>{{ $data->created_at->diffForHumans() }}</td>
+
+                                        <td>
+                                            <a href="{{ route('meetings.edit', $data->id) }}"
+                                                class="btn btn-icon btn-info"><i class="las la-edit fs-2 me-2"></i></a>
+                                            <a href="#" onclick="confirmDestroy('{{ $data->id }}',this)"
+                                                class="btn btn-icon btn-danger"><i class="las la-trash fs-2 me-2"></i> </a>
+
+
+                                        </td>
 
                                     </tr>
                                 @empty
@@ -73,7 +82,7 @@
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
 
     <script>
-        {{--  $("#kt_datatable_example_5").DataTable({
+        {{-- $("#kt_datatable_example_5").DataTable({
             "language": {
                 "lengthMenu": "Show _MENU_",
             },
@@ -88,8 +97,53 @@
                 "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
                 "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
                 ">"
-        });  --}}
+        }); --}}
     </script>
+    <script>
+        function confirmDestroy(id, reference){
+            Swal.fire({
+                title: 'هل أنت متأكد؟',
+                text: "لن تتمكن من التراجع عن هذا!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نعم،احذفه!',
+                cancelButtonText: 'الغاء'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    destroy(id, reference);
+                }
+            });
+        }
+
+        function destroy(id, reference) {
+            //JS - Axios
+            axios.delete('/dashboard/meetings/'+id)
+                .then(function (response) {
+                    // handle success
+                    console.log(response);
+                    reference.closest('tr').remove();
+                    showMessage(response.data);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                    showMessage(error.response.data);
+                })
+
+        }
+
+        function showMessage(data) {
+            Swal.fire({
+                icon: data.icon,
+                title: data.title,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    </script>
+
 
 
 @stop

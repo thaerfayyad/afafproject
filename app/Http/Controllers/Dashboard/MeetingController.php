@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Meeting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
 class MeetingController extends Controller
@@ -67,7 +68,7 @@ class MeetingController extends Controller
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
                 $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $meeting->title . '.' . $image->getClientOriginalExtension();
-                $request->file('image')->storeAs('/teams', $imageName, ['disk' => 'public']);
+                $request->file('file')->storeAs('/teams', $imageName, ['disk' => 'public']);
                 $meeting->file = 'teams/' . $imageName;
             }
             $isSaved = $meeting->save();
@@ -101,6 +102,7 @@ class MeetingController extends Controller
     public function edit(Meeting $meeting)
     {
         //
+        return response()->view('dashboard.meeting.edit', compact('meeting'));
     }
 
     /**
@@ -113,6 +115,37 @@ class MeetingController extends Controller
     public function update(Request $request, Meeting $meeting)
     {
         //
+        $validator = Validator($request->all(), [
+            'title' => 'required|string|min:3|max:45',
+            'file' => 'required|mimes:pdf'
+        ]);
+        if (!$validator->fails()) {
+
+
+
+            $meeting->title = $request->input('title');
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $meeting->title . '.' . $image->getClientOriginalExtension();
+                $request->file('image')->storeAs('/teams', $imageName, ['disk' => 'public']);
+                $meeting->image = 'teams/' . $imageName;
+            }
+            if ($request->hasFile('file')) {
+                $image = $request->file('file');
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $meeting->title . '.' . $image->getClientOriginalExtension();
+                $request->file('file')->storeAs('/teams', $imageName, ['disk' => 'public']);
+                $meeting->file = 'teams/' . $imageName;
+            }
+            $isSaved = $meeting->save();
+            return response()->json([
+                'message' => $isSaved ? 'Created successfully' : 'Create Failed'
+            ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        } else {
+            return response()->json([
+                'message' =>   $validator->getMessageBag()->first()
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**
@@ -124,5 +157,12 @@ class MeetingController extends Controller
     public function destroy(Meeting $meeting)
     {
         //
+        $imageName = $meeting->value;
+        $deleted = $meeting->delete();
+        if ($deleted) Storage::disk('public')->delete($imageName);
+        return response()->json([
+            'title' => $deleted ? 'تم الحذف بنجاح' : "فشل الحذف",
+            'icon' => $deleted ? 'success' : "error",
+        ], $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 }

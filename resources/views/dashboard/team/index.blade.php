@@ -29,6 +29,8 @@
                                     <th>المسمى الوظيفي</th>
                                     <th>نوع العضو</th>
                                     <th>أنشئ بتاريخ</th>
+                                    <th>العماليات</th>
+
 
                                 </tr>
                             </thead>
@@ -45,6 +47,14 @@
                                         <td>{{$data ->position }}</td>
                                         <td>{{$data ->team }}</td>
                                         <td>{{ $data->created_at->diffForHumans()}}</td>
+                                        <td>
+                                            <a href="{{ route('teams.edit', $data->id) }}"
+                                                class="btn btn-icon btn-info"><i class="las la-edit fs-2 me-2"></i></a>
+                                            <a href="#" onclick="confirmDestroy('{{ $data->id }}',this)"
+                                                class="btn btn-icon btn-danger"><i class="las la-trash fs-2 me-2"></i> </a>
+
+
+                                        </td>
 
                                     </tr>
                                 @empty
@@ -90,6 +100,51 @@
                 ">"
         });  --}}
     </script>
+    <script>
+        function confirmDestroy(id, reference){
+            Swal.fire({
+                title: 'هل أنت متأكد؟',
+                text: "لن تتمكن من التراجع عن هذا!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'نعم،احذفه!',
+                cancelButtonText: 'الغاء'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    destroy(id, reference);
+                }
+            });
+        }
+
+        function destroy(id, reference) {
+            //JS - Axios
+            axios.delete('/dashboard/teams/'+id)
+                .then(function (response) {
+                    // handle success
+                    console.log(response);
+                    reference.closest('tr').remove();
+                    showMessage(response.data);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                    showMessage(error.response.data);
+                })
+
+        }
+
+        function showMessage(data) {
+            Swal.fire({
+                icon: data.icon,
+                title: data.title,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    </script>
+
 
 
 @stop

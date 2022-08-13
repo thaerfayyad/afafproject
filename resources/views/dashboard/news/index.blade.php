@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'الجمعية العمومية')
+@section('title', 'الاعضاء')
 @section('css')
 @section('content')
 
@@ -24,11 +24,11 @@
                             <thead>
                                 <tr class="fw-bolder fs-6 text-gray-800 px-7">
                                     <th> الرقم # </th>
-                                    <th>العنوان</th>
-                                    <th>الملف ا لمرفق</th>
+                                    <th> الصورة </th>
+                                    <th>الاسم</th>
+                                    <th>الاخبار</th>
                                     <th>أنشئ بتاريخ</th>
                                     <th> العمليات</th>
-
 
                                 </tr>
                             </thead>
@@ -36,14 +36,17 @@
                                 @forelse ($datas as  $data)
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
-                                        <td> {{ $data->title }} </td>
+                                        <td> <img src="{{ $data->image_path }}" alt="" width="100px"> </td>
+                                        <td>{{ $data->title }}</td>
+                                        <td>{{ $data->descriptions }}</td>
 
-                                        <td> <a href="{{ $data->file_path }}" target="_blank"> الملف المرفق</a></td>
 
-                                        <td>{{ $data->created_at->diffForHumans()}}</td>
+                                        <td>{{ $data->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="{{ route('publicAssociations.edit',$data->id ) }}" class="btn btn-icon btn-info"><i class="las la-edit fs-2 me-2"></i></a>
-                                            <a href="#"  onclick="confirmDestroy('{{$data->id}}',this)"  class="btn btn-icon btn-danger"><i class="las la-trash fs-2 me-2"></i>  </a>
+                                            <a href="{{ route('news.edit', $data->id) }}" class="btn btn-icon btn-info"><i
+                                                    class="las la-edit fs-2 me-2"></i></a>
+                                            <a href="#" onclick="confirmDestroy('{{ $data->id }}',this)"
+                                                class="btn btn-icon btn-danger"><i class="las la-trash fs-2 me-2"></i> </a>
 
 
                                         </td>
@@ -75,7 +78,7 @@
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
 
     <script>
-        {{--  $("#kt_datatable_example_5").DataTable({
+        {{-- $("#kt_datatable_example_5").DataTable({
             "language": {
                 "lengthMenu": "Show _MENU_",
             },
@@ -90,10 +93,11 @@
                 "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
                 "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
                 ">"
-        });  --}}
+        }); --}}
     </script>
+
     <script>
-        function confirmDestroy(id, reference){
+        function confirmDestroy(id, reference) {
             Swal.fire({
                 title: 'هل أنت متأكد؟',
                 text: "لن تتمكن من التراجع عن هذا!",
@@ -112,14 +116,14 @@
 
         function destroy(id, reference) {
             //JS - Axios
-            axios.delete('/dashboard/publicAssociations/'+id)
-                .then(function (response) {
+            axios.delete('/dashboard/news/' + id)
+                .then(function(response) {
                     // handle success
                     console.log(response);
                     reference.closest('tr').remove();
                     showMessage(response.data);
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     // handle error
                     console.log(error);
                     showMessage(error.response.data);
@@ -136,8 +140,6 @@
             });
         }
     </script>
-
-
 
 
 @stop

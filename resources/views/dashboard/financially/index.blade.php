@@ -25,6 +25,7 @@
                                 <tr class="fw-bolder fs-6 text-gray-800 px-7">
                                     <th> الرقم # </th>
                                     <th>الاسم</th>
+                                    <th>السنة</th>
                                     <th> المرفق  </th>
                                     <th>أنشئ بتاريخ</th>
                                     <th> العمليات</th>
@@ -35,11 +36,9 @@
                                 @forelse ($datas as  $data)
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
-
-
-
                                         <td>{{$data ->title }}</td>
-                                        <td> <a href="#"> الملف المرفق</a></td>
+                                        <td>{{$data ->year }}</td>
+                                        <td> <a href="{{ $data->file_path }}"> الملف المرفق</a></td>
 
                                         <td>{{ $data->created_at->diffForHumans()}}</td>
                                         <td>

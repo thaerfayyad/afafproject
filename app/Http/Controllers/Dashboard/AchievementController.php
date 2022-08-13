@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\publicAssociation;
+use App\Models\Achievement;
 use Carbon\Carbon;
-use Database\Seeders\PublicAssociationSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class PublicAssociationController extends Controller
+class AchievementController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +19,8 @@ class PublicAssociationController extends Controller
     public function index()
     {
         //
-        $data = PublicAssociation::all();
-        return response()->view('dashboard.publicAssociation.index', [
+        $data = Achievement::all();
+        return response()->view('dashboard.achievement.index', [
             'datas' => $data,
         ]);
     }
@@ -34,7 +33,8 @@ class PublicAssociationController extends Controller
     public function create()
     {
         //
-        return response()->view('dashboard.publicAssociation.create');
+        return response()->view('dashboard.achievement.create');
+
     }
 
     /**
@@ -46,25 +46,26 @@ class PublicAssociationController extends Controller
     public function store(Request $request)
     {
         //
-
-
         $validator = Validator($request->all(), [
             'title' => 'required|string|min:3|max:45',
-
             'file' => 'required|mimes:pdf'
         ]);
         if (!$validator->fails()) {
 
 
-            $association = new publicAssociation();
-            $association->title = $request->input('title');
+            $achievement = new Achievement();
+            $achievement->title = $request->input('title');
+
+
+
+
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
-                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $association->title . '.' . $image->getClientOriginalExtension();
-                $request->file('file')->storeAs('/association', $imageName, ['disk' => 'public']);
-                $association->file = 'association/' . $imageName;
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $achievement->title . '.' . $image->getClientOriginalExtension();
+                $request->file('file')->storeAs('/Achievement', $imageName, ['disk' => 'public']);
+                $achievement->file = 'Achievement/' . $imageName;
             }
-            $isSaved = $association->save();
+            $isSaved = $achievement->save();
             return response()->json([
                 'message' => $isSaved ? 'Created successfully' : 'Create Failed'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -78,10 +79,10 @@ class PublicAssociationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\publicAssociation  $publicAssociation
+     * @param  \App\Models\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function show(publicAssociation $publicAssociation)
+    public function show(Achievement $achievement)
     {
         //
     }
@@ -89,24 +90,23 @@ class PublicAssociationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\publicAssociation  $publicAssociation
+     * @param  \App\Models\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function edit(publicAssociation $publicAssociation)
+    public function edit(Achievement $achievement)
     {
         //
-        return response()->view('dashboard.publicAssociation.edit', compact('publicAssociation'));
-
+        return response()->view('dashboard.achievement.edit',compact('achievement'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\publicAssociation  $publicAssociation
+     * @param  \App\Models\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, publicAssociation $publicAssociation)
+    public function update(Request $request, Achievement $achievement)
     {
         //
         $validator = Validator($request->all(), [
@@ -117,15 +117,15 @@ class PublicAssociationController extends Controller
 
 
 
-            $publicAssociation->title = $request->input('title');
+            $achievement->title = $request->input('title');
 
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
-                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $publicAssociation->title . '.' . $image->getClientOriginalExtension();
-                $request->file('file')->storeAs('/association', $imageName, ['disk' => 'public']);
-                $publicAssociation->file = 'association/' . $imageName;
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $achievement->title . '.' . $image->getClientOriginalExtension();
+                $request->file('file')->storeAs('/Achievement', $imageName, ['disk' => 'public']);
+                $achievement->file = 'Achievement/' . $imageName;
             }
-            $isSaved = $publicAssociation->save();
+            $isSaved = $achievement->save();
             return response()->json([
                 'message' => $isSaved ? 'Created successfully' : 'Create Failed'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -139,14 +139,14 @@ class PublicAssociationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\publicAssociation  $publicAssociation
+     * @param  \App\Models\Achievement  $achievement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(publicAssociation $publicAssociation)
+    public function destroy(Achievement $achievement)
     {
         //
-        $imageName = $publicAssociation->value;
-        $deleted = $publicAssociation->delete();
+        $imageName = $achievement->value;
+        $deleted = $achievement->delete();
         if ($deleted) Storage::disk('public')->delete($imageName);
         return response()->json([
             'title' => $deleted ? 'تم الحذف بنجاح' : "فشل الحذف",

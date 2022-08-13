@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'الخطط  ' )
+@section('title', 'قوائم الماليا' )
 @section('css')
 @section('content')
 
@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>اضافة قائمة جمعية عمومية جديدة</h2>
+                                            <h2>اضافة قائمة ماليا</h2>
                                         </div>
                                     </div>
 
@@ -36,18 +36,22 @@
                                             <div class="col-md-4 col-sm-12 mt-8">
 
                                                 <label for="title" class="form-label required"> العنوان  </label>
-                                                <input type="text" class="form-control form-control-solid" id="title"
+                                                <input type="text" class="form-control form-control-solid" value="{{ $news->title }}" id="title"
                                                     name="title">
-                                            </div>
 
+                                            </div>
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="file" class="form-label required"> الملف المرفق</label>
-                                                <input type="file" class="form-control form-control-solid" id="file"
-                                                    name="file">
+                                                <label for="image" class="form-label required">الصورة</label>
+                                                <input type="file" class="form-control form-control-solid" id="image"
+                                                    name="image">
 
                                             </div>
+                                            <div class="col-md-4 col-sm-12 mt-8">
 
+                                                <label for="descriptions" class="form-label required"> الخبر  </label>
+                                                <textarea  class="form-control form-control-solid" name="descriptions" id="descriptions" cols="30" rows="5">{{ $news->descriptions }}</textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +73,7 @@
                         <!--begin::Button-->
 
 
-                        <button type="button" onclick="store()" class="btn btn-primary">
+                        <button type="button" onclick="update('{{$news->id}}')" class="btn btn-primary">
                             <span class="indicator-label">حفظ</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -107,14 +111,13 @@
         });
     </script>
     <script>
-        function store() {
+        function update(id) {
             let formData = new FormData($('#create-form')[0]);
-            axios.post('/dashboard/publicAssociations', formData, {
-            }).then(function (response) {
+            formData.append('_method','PUT');
+            axios.post('/dashboard/news/'+id, formData).then(function (response) {
                 console.log(response);
                 toastr.success(response.data.message);
-                document.getElementById('create-form').reset();
-                // window.location.href = '/dashboard/settings/';
+                window.location.href = '/dashboard/news/';
             }).catch(function (error) {
 
                 let messages = '';
