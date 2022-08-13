@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Achievement extends Model
 {
     use HasFactory;
+    protected $fillable = ['title', 'file'];
+
+    protected $appends = ['file_path'];
+
+    public function getFilePathAttribute()
+    {
+        return asset('storage/' . $this->file);
+    }
+
 }

@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'الخطط  ' )
+@section('title', 'الخطط ')
 @section('css')
 @section('content')
 
@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>اضافة اخبار ماليا</h2>
+                                            <h2>اضافة اخبار </h2>
                                         </div>
                                     </div>
 
@@ -35,7 +35,7 @@
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="title" class="form-label required"> العنوان  </label>
+                                                <label for="title" class="form-label required"> العنوان </label>
                                                 <input type="text" class="form-control form-control-solid" id="title"
                                                     name="title">
                                             </div>
@@ -46,11 +46,10 @@
                                                     name="image">
 
                                             </div>
-                                            <div class="col-md-4 col-sm-12 mt-8">
+                                            <label> الخبر</label>
+                                            <label><strong>Description :</strong></label>
 
-                                                <label for="descriptions" class="form-label required"> الخبر  </label>
-                                                <textarea  class="form-control form-control-solid" name="descriptions" id="descriptions" cols="30" rows="5"></textarea>
-                                            </div>
+                                                <textarea name="descriptions" id="descriptions" class="form-control ckeditor"></textarea></textarea>
 
 
 
@@ -69,13 +68,13 @@
 
                     <div class="d-flex justify-content-end">
                         <!--begin::Button-->
-                        <a href="../../demo1/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel"
-                            class="btn btn-light me-5">الغاء</a>
+                        <button type="reset" id="kt_ecommerce_add_product_cancel"
+                            class="btn btn-light me-5">الغاء</button>
                         <!--end::Button-->
                         <!--begin::Button-->
 
 
-                        <button type="button" onclick="store()" class="btn btn-primary">
+                        <button type="button" onclick="performStore()" class="btn btn-primary">
                             <span class="indicator-label">حفظ</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -95,49 +94,22 @@
 @endsection
 @section('js')
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+
+
+    <script src=" {{ asset('asset(js/ckeditor/ckeditor.js') }}"></script>
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+
     <script>
-        $('#kt_docs_repeater_basic').repeater({
-            initEmpty: true,
-
-            defaultValues: {
-                'text-input': 'foo'
-            },
-
-            show: function() {
-                $(this).slideDown();
-            },
-
-            hide: function(deleteElement) {
-                $(this).slideUp(deleteElement);
-            }
-        });
-    </script>
-    <script>
-        function store() {
-            let formData = new FormData($('#create-form')[0]);
-            axios.post('/dashboard/news', formData, {
-            }).then(function (response) {
-                console.log(response);
-                toastr.success(response.data.message);
-                document.getElementById('create-form').reset();
-                // window.location.href = '/dashboard/settings/';
-            }).catch(function (error) {
-
-                let messages = '';
-                if(typeof  error.response.data.message == 'string'){
-                    toastr.error(error.response.data.message);
-                }else{
-                    for (const [key, value] of Object.entries(error.response.data.message)) {
-                        messages+='-'+value+'</br>';
-                    }
-                    toastr.error(messages);
-                }
-
-            });
+        function performStore() {
+            let formData = new FormData();
+            formData.append('title', document.getElementById('title').value);
+            formData.append('descriptions', document.getElementById('descriptions').value);
+            formData.append('image', document.getElementById('image').files[0])
+            store('/dashboard/news', formData), '/dashboard/news/create';
 
         }
-
     </script>
-
 
 @stop

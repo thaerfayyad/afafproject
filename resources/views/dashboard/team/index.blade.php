@@ -6,18 +6,40 @@
 
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
-        <!--end::Toolbar-->
         <!--begin::Post-->
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <!--begin::Container-->
-            <div id="kt_content_container" class="container-xxl">
+            <div id="kt_content_container" class="container-fluid">
                 <!--begin::Card-->
                 <div class="card">
                     <!--begin::Card header-->
+                    <div class="card-header border-0 pt-6">
+                        <!--begin::Card title-->
+                        <div class="card-title">
 
+                        </div>
+                        <!--begin::Card title-->
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                                <!--begin::Filter-->
+
+
+
+                                <!--begin::Add customer-->
+                                <a href="{{ route('teams.create') }}" class="btn btn-primary"
+                                    data-bs-target="#kt_modal_add_customer"> اضافة </a>
+                                <!--end::Add customer-->
+                            </div>
+                            <!--end::Toolbar-->
+
+                        </div>
+                        <!--end::Card toolbar-->
+                    </div>
                     <!--end::Card header-->
                     <!--begin::Card body-->
-                    <div class="card-body pt-0">
+                    <div class="card-body  ">
                         <!--begin::Table-->
                         <table id="kt_datatable_example_5"
                             class="table table-striped table-row-bordered gy-5 gs-7 border rounded">
@@ -39,17 +61,17 @@
                                     <tr>
                                         <td> {{ $loop->iteration }}</td>
                                         <td>
-                                            <img src="{{ $data->image_path }}" alt=""  width="150px">
+                                            <img src="{{ $data->image_path }}" alt="" width="150px">
                                         </td>
 
 
-                                        <td>{{$data ->name }}</td>
-                                        <td>{{$data ->position }}</td>
-                                        <td>{{$data ->team }}</td>
-                                        <td>{{ $data->created_at->diffForHumans()}}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->position }}</td>
+                                        <td>{{ $data->team }}</td>
+                                        <td>{{ $data->created_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="{{ route('teams.edit', $data->id) }}"
-                                                class="btn btn-icon btn-info"><i class="las la-edit fs-2 me-2"></i></a>
+                                            <a href="{{ route('teams.edit', $data->id) }}" class="btn btn-icon btn-info"><i
+                                                    class="las la-edit fs-2 me-2"></i></a>
                                             <a href="#" onclick="confirmDestroy('{{ $data->id }}',this)"
                                                 class="btn btn-icon btn-danger"><i class="las la-trash fs-2 me-2"></i> </a>
 
@@ -75,15 +97,13 @@
         </div>
         <!--end::Post-->
     </div>
-
 @endsection
-
 
 @section('js')
     <script src="{{ asset('assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
 
     <script>
-        {{--  $("#kt_datatable_example_5").DataTable({
+        {{-- $("#kt_datatable_example_5").DataTable({
             "language": {
                 "lengthMenu": "Show _MENU_",
             },
@@ -98,10 +118,10 @@
                 "<'col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'i>" +
                 "<'col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'p>" +
                 ">"
-        });  --}}
+        }); --}}
     </script>
     <script>
-        function confirmDestroy(id, reference){
+        function confirmDestroy(id, reference) {
             Swal.fire({
                 title: 'هل أنت متأكد؟',
                 text: "لن تتمكن من التراجع عن هذا!",
@@ -120,14 +140,14 @@
 
         function destroy(id, reference) {
             //JS - Axios
-            axios.delete('/dashboard/teams/'+id)
-                .then(function (response) {
+            axios.delete('/dashboard/teams/' + id)
+                .then(function(response) {
                     // handle success
                     console.log(response);
                     reference.closest('tr').remove();
                     showMessage(response.data);
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     // handle error
                     console.log(error);
                     showMessage(error.response.data);

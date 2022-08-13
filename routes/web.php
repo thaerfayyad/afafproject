@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Dashboard\AchievementController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\CoursesController;
 use App\Http\Controllers\Dashboard\FinanciallyController;
+use App\Http\Controllers\Dashboard\JobController;
 use App\Http\Controllers\Dashboard\MeetingController;
 use App\Http\Controllers\Dashboard\NewsController;
 use App\Http\Controllers\Dashboard\PublicAssociationController;
@@ -49,7 +51,7 @@ Route::prefix('dashboard')->middleware('guest:admin')->group(function () {
 Route::prefix('dashboard')->middleware('auth:admin') ->group(function () {
 
 
-    Route::get('/', function () {  return view('dashboard.index');  })->name('dashboard.home');
+    Route::get('/', function () {  return view('dashboard.home');  })->name('dashboard.home');
 
 
     Route::resource('publicAssociations',  PublicAssociationController::class);
@@ -59,8 +61,10 @@ Route::prefix('dashboard')->middleware('auth:admin') ->group(function () {
     Route::resource('plans',  PlanController::class);
     Route::resource('achievements',  AchievementController::class);
     Route::resource('news',  NewsController::class);
+    Route::resource('courses',  CoursesController::class);
+    Route::resource('jobs',  JobController::class);
 
 
-
+    Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 

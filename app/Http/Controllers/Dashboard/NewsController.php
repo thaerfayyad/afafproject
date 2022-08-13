@@ -50,7 +50,8 @@ class NewsController extends Controller
         $validator = Validator($request->all(), [
             'title' => 'required|string|min:3|max:45',
             'image' => 'required',
-            'descriptions' => 'required|string'
+            'descriptions' => 'required',
+
         ]);
         if (!$validator->fails()) {
 
@@ -116,14 +117,14 @@ class NewsController extends Controller
         $validator = Validator($request->all(), [
             'title' => 'required|string|min:3|max:45',
             'image' => 'required',
-            'descriptions' => 'required|string'
+            'kt_docs_ckeditor_classic' => 'required|string'
         ]);
         if (!$validator->fails()) {
 
 
 
             $news->title = $request->input('title');
-            $news->descriptions = $request->input('descriptions');
+            $news->descriptions = $request->input('kt_docs_ckeditor_classic');
 
 
 
