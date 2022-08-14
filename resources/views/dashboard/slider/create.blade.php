@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', '')
+@section('title', '' )
 @section('css')
 @section('content')
 
@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2> تعديل  الدورة </h2>
+                                            <h2>اضافة عضو جديد</h2>
                                         </div>
                                     </div>
 
@@ -35,36 +35,23 @@
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="name" class="form-label required"> الاسم </label>
-                                                <input type="text" class="form-control form-control-solid"
-                                                    value="{{ $courses->title }}" id="title" name="title">
-
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 mt-8">
-
-                                                <label for="team" class="form-label required">نوع الدورة</label>
-
-                                                <select class="form-select form-control form-control-solid"
-                                                    aria-label="Default select example" id="type" name="type">
-                                                    <option value="0"  selected>أختار </option>
-                                                    <option value="online"{{ $courses->type == 'online' ? 'selected' : '' }} >اونلاين</option>
-                                                    <option value="onSite" {{ $courses->type == 'onSite' ? 'selected' : '' }} > وجاهي </option>
-                                                </select>
+                                                <label for="name" class="form-label required"> العنوان  </label>
+                                                <input type="text" class="form-control form-control-solid" id="title"
+                                                    name="title">
 
                                             </div>
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="name" class="form-label required"> الوصف  </label>
-                                                 <textarea name="descriptions" cols="30" rows="5" class="form-control form-control-solid">{{ $courses->descriptions}}</textarea>
+                                                <label for="position" class="form-label required"> الوصف </label>
+                                               <textarea name="descriptions" id="descriptions" class="form-control form-control-solid" cols="30" rows="5"></textarea>
 
                                             </div>
-                                            <div class="col-md-3 col-sm-12 mt-6">
+                                            <div class="col-12 col-sm-12 mt-8">
 
 
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="background-image:   @if(!$courses->image)  url({{asset('assets/media/avatars/blank.png')}})   @else  url('{{url(Storage::url($courses->image))}}') @endif">
+                                                    style="background-image: url({{asset('assets/media/avatars/blank.png')}})">
                                                     <!--begin::Image preview wrapper-->
                                                     <div class="image-input-wrapper w-125px h-125px"></div>
                                                     <!--end::Image preview wrapper-->
@@ -125,7 +112,7 @@
                         <!--begin::Button-->
 
 
-                        <button type="button" onclick="update('{{ $courses->id }}')" class="btn btn-primary">
+                        <button type="button" onclick="store()" class="btn btn-primary">
                             <span class="indicator-label">حفظ</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -163,21 +150,22 @@
         });
     </script>
     <script>
-        function update(id) {
+        function store() {
             let formData = new FormData($('#create-form')[0]);
-            formData.append('_method', 'PUT');
-            axios.post('/dashboard/courses/' + id, formData).then(function(response) {
+            axios.post('/dashboard/sliders', formData, {
+            }).then(function (response) {
                 console.log(response);
                 toastr.success(response.data.message);
-                window.location.href = '/dashboard/courses/';
-            }).catch(function(error) {
+                document.getElementById('create-form').reset();
+                // window.location.href = '/dashboard/settings/';
+            }).catch(function (error) {
 
                 let messages = '';
-                if (typeof error.response.data.message == 'string') {
+                if(typeof  error.response.data.message == 'string'){
                     toastr.error(error.response.data.message);
-                } else {
+                }else{
                     for (const [key, value] of Object.entries(error.response.data.message)) {
-                        messages += '-' + value + '</br>';
+                        messages+='-'+value+'</br>';
                     }
                     toastr.error(messages);
                 }
@@ -185,6 +173,8 @@
             });
 
         }
+
     </script>
+
 
 @stop

@@ -19,6 +19,7 @@
 <script src="{{ asset('assets/plugins/custom/ckeditor/ckeditor-balloon.bundle.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/ckeditor/ckeditor-balloon-block.bundle.js') }}"></script>
 <script src="{{ asset('assets/plugins/custom/ckeditor/ckeditor-document.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 
 {{--  <script src="{{asset('assets/js/custom/apps/ecommerce/catalog/save-product.js')}}"></script>  --}}
 {{--TODO:: ACTIVE This Line for calender--}}

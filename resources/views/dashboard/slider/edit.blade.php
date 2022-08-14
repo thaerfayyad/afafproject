@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2> تعديل  الدورة </h2>
+                                            <h2>اضافة عضو جديد</h2>
                                         </div>
                                     </div>
 
@@ -35,36 +35,24 @@
                                         <div class="row">
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="name" class="form-label required"> الاسم </label>
+                                                <label for="name" class="form-label required"> العنوان </label>
                                                 <input type="text" class="form-control form-control-solid"
-                                                    value="{{ $courses->title }}" id="title" name="title">
-
-                                            </div>
-
-                                            <div class="col-md-4 col-sm-12 mt-8">
-
-                                                <label for="team" class="form-label required">نوع الدورة</label>
-
-                                                <select class="form-select form-control form-control-solid"
-                                                    aria-label="Default select example" id="type" name="type">
-                                                    <option value="0"  selected>أختار </option>
-                                                    <option value="online"{{ $courses->type == 'online' ? 'selected' : '' }} >اونلاين</option>
-                                                    <option value="onSite" {{ $courses->type == 'onSite' ? 'selected' : '' }} > وجاهي </option>
-                                                </select>
+                                                    value="{{ $slider->title }}" id="title" name="title">
 
                                             </div>
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="name" class="form-label required"> الوصف  </label>
-                                                 <textarea name="descriptions" cols="30" rows="5" class="form-control form-control-solid">{{ $courses->descriptions}}</textarea>
+                                                <label for="position" class="form-label required"> الوصف </label>
+                                               <textarea name="descriptions" id="descriptions" class="form-control form-control-solid" cols="30" rows="5">{{ $slider->descriptions }}</textarea>
 
                                             </div>
-                                            <div class="col-md-3 col-sm-12 mt-6">
+
+                                            <div class="col-md-12 col-sm-12 mt-6">
 
 
                                                 <!--begin::Image input-->
                                                 <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="background-image:   @if(!$courses->image)  url({{asset('assets/media/avatars/blank.png')}})   @else  url('{{url(Storage::url($courses->image))}}') @endif">
+                                                    style="background-image:   @if(! $slider->image)  url({{asset('assets/media/avatars/blank.png')}})   @else  url('{{url(Storage::url( $slider->image))}}') @endif">
                                                     <!--begin::Image preview wrapper-->
                                                     <div class="image-input-wrapper w-125px h-125px"></div>
                                                     <!--end::Image preview wrapper-->
@@ -104,6 +92,7 @@
                                                 <!--end::Image input-->
 
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +114,7 @@
                         <!--begin::Button-->
 
 
-                        <button type="button" onclick="update('{{ $courses->id }}')" class="btn btn-primary">
+                        <button type="button" onclick="update('{{ $slider->id }}')" class="btn btn-primary">
                             <span class="indicator-label">حفظ</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -166,10 +155,10 @@
         function update(id) {
             let formData = new FormData($('#create-form')[0]);
             formData.append('_method', 'PUT');
-            axios.post('/dashboard/courses/' + id, formData).then(function(response) {
+            axios.post('/dashboard/sliders/' + id, formData).then(function(response) {
                 console.log(response);
                 toastr.success(response.data.message);
-                window.location.href = '/dashboard/courses/';
+                window.location.href = '/dashboard/sliders/';
             }).catch(function(error) {
 
                 let messages = '';

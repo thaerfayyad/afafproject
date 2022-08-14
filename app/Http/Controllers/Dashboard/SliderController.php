@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Team;
+use App\Models\Slider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class TeamController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class TeamController extends Controller
     public function index()
     {
         //
-        $data = Team::all();
-        return response()->view('dashboard.team.index',[
-            'datas' =>$data,
+        $data = Slider::all();
+        return response()->view('dashboard.slider.index', [
+            'datas' => $data,
         ]);
     }
 
@@ -34,7 +34,8 @@ class TeamController extends Controller
     public function create()
     {
         //
-        return response()->view('dashboard.team.create');
+         return response()->view('dashboard.slider.create');
+
     }
 
     /**
@@ -47,27 +48,25 @@ class TeamController extends Controller
     {
         //
         $validator = Validator($request->all(), [
-            'name' => 'required|string|min:3|max:45',
+            'title' => 'required|string|min:3|max:45',
             'image' => 'required',
-            'team' => 'required',
-            'position' => 'required',
+            'descriptions' => 'required',
+
         ]);
         if (!$validator->fails()) {
 
 
-            $team = new Team();
-            $team->name = $request->input('name');
-            $team->team = $request->input('team');
-            $team->position = $request->input('position');
-
+            $slider = new Slider();
+            $slider->title = $request->input('title');
+            $slider->descriptions = $request->input('descriptions');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $team->name . '.' . $image->getClientOriginalExtension();
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $slider->name . '.' . $image->getClientOriginalExtension();
                 $request->file('image')->storeAs('/teams', $imageName, ['disk' => 'public']);
-                $team->image = 'teams/' . $imageName;
+                $slider->image = 'teams/' . $imageName;
             }
-            $isSaved = $team->save();
+            $isSaved = $slider->save();
             return response()->json([
                 'message' => $isSaved ? 'Created successfully' : 'Create Failed'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -81,10 +80,10 @@ class TeamController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function show(Team $team)
+    public function show(Slider $slider)
     {
         //
     }
@@ -92,13 +91,13 @@ class TeamController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function edit(Team $team)
+    public function edit(Slider $slider)
     {
         //
-        return response()->view('dashboard.team.edit', compact('team'));
+        return response()->view('dashboard.slider.edit', compact('slider'));
 
     }
 
@@ -106,34 +105,30 @@ class TeamController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+    public function update(Request $request, Slider $slider)
     {
         //
         $validator = Validator($request->all(), [
-            'name' => 'required|string|min:3|max:45',
+            'title' => 'required|string|min:3|max:45',
             'image' => 'required',
-            'team' => 'required',
-            'position' => 'required',
+            'descriptions' => 'required',
+
         ]);
         if (!$validator->fails()) {
 
-
-
-            $team->name = $request->input('name');
-            $team->team = $request->input('team');
-            $team->position = $request->input('position');
-
+            $slider->title = $request->input('title');
+            $slider->descriptions = $request->input('descriptions');
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
-                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $team->name . '.' . $image->getClientOriginalExtension();
+                $imageName = Carbon::now()->format('Y_m_d_h_i_s') . '_' . $slider->name . '.' . $image->getClientOriginalExtension();
                 $request->file('image')->storeAs('/teams', $imageName, ['disk' => 'public']);
-                $team->image = 'teams/' . $imageName;
+                $slider->image = 'teams/' . $imageName;
             }
-            $isSaved = $team->save();
+            $isSaved = $slider->save();
             return response()->json([
                 'message' => $isSaved ? 'Created successfully' : 'Create Failed'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
@@ -147,14 +142,14 @@ class TeamController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Team  $team
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Team $team)
+    public function destroy(Slider $slider)
     {
         //
-        $imageName = $team->value;
-        $deleted = $team->delete();
+        $imageName = $slider->value;
+        $deleted = $slider->delete();
         if ($deleted) Storage::disk('public')->delete($imageName);
         return response()->json([
             'title' => $deleted ? 'تم الحذف بنجاح' : "فشل الحذف",

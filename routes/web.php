@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\PublicAssociationController;
 use App\Http\Controllers\Dashboard\TeamController;
 use App\Http\Controllers\Dashboard\PlanController;
 use App\Http\Controllers\Dashboard\PolicyController;
+use App\Http\Controllers\Dashboard\SliderController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,7 @@ Route::prefix('dashboard')->middleware('auth:admin') ->group(function () {
     Route::resource('courses',  CoursesController::class);
     Route::resource('jobs',  JobController::class);
     Route::resource('policies',  PolicyController::class);
+    Route::resource('sliders',  SliderController::class);
 
 
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');

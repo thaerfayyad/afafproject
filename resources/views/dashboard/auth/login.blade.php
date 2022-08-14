@@ -45,7 +45,9 @@ License: For each use you must have a valid license purchased only from above li
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<!--begin::Logo-->
 					<a href="../../demo1/dist/index.html" class="mb-12">
-						<img alt="Logo" src="assets/media/logos/logo-1.svg" class="h-40px" />
+                    <img src="{{ asset('front/assets/img/logo.png') }}"class="h-40px"  width=" " height=" "  alt="">
+
+
 					</a>
 					<!--end::Logo-->
 					<!--begin::Wrapper-->
@@ -55,11 +57,11 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Heading-->
 							<div class="text-center mb-10">
 								<!--begin::Title-->
-								<h1 class="text-dark mb-3">Sign In to Metronic</h1>
+								<h1 class="text-dark mb-3">       </h1>
 								<!--end::Title-->
 								<!--begin::Link-->
-								<div class="text-gray-400 fw-bold fs-4">New Here?
-								<a href="../../demo1/dist/authentication/layouts/basic/sign-up.html" class="link-primary fw-bolder">Create an Account</a></div>
+
+
 								<!--end::Link-->
 							</div>
 							<!--begin::Heading-->
@@ -81,7 +83,6 @@ License: For each use you must have a valid license purchased only from above li
 									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
 									<!--end::Label-->
 									<!--begin::Link-->
-									<a href="../../demo1/dist/authentication/layouts/basic/password-reset.html" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
 									<!--end::Link-->
 								</div>
 								<!--end::Wrapper-->
@@ -112,11 +113,7 @@ License: For each use you must have a valid license purchased only from above li
 				<!--begin::Footer-->
 				<div class="d-flex flex-center flex-column-auto p-10">
 					<!--begin::Links-->
-					<div class="d-flex align-items-center fw-bold fs-6">
-						<a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
-						<a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
-						<a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
-					</div>
+
 					<!--end::Links-->
 				</div>
 				<!--end::Footer-->
