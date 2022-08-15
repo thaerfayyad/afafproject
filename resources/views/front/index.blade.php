@@ -131,7 +131,7 @@
                                         <i class="fa fa-eye fa-3x" style="color:red"></i>
                                     </div>
                                     <h4 class="text-center">رؤية جمعية العفاف</h4>
-                                    <p class="text-center">الوجهة الآمنة و الموثوقة للراغبين في الزواج</p>
+                                    <p class="text-center"> {{ $our_vision->value }}  </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -140,9 +140,7 @@
                                         <i class="fa fa-file fa-3x" style="color:green"></i>
                                     </div>
                                     <h4 class="text-center">رسالة جمعية العفاف</h4>
-                                    <p class="text-center">نمنح النصح و الاستشارة الآمنة ، بسرية تامة حول اختيار الشريك
-                                        الكفؤ من خلال المعاييرالدقيقة و الضوابط الشرعية لتحقيق التوافق الامثل و الاستدامة
-                                        الاسرية بين الطرفين </p>
+                                    <p class="text-center"> {{ $message->value }}</p>
                                 </div>
 
                             </div>
@@ -152,7 +150,7 @@
                                         <i class="fa fa-star fa-3x" style="color:tomato"></i>
                                     </div>
                                     <h4 class="text-center">قيمنا</h4>
-                                    <p> المصداقية ، الامانة ، النزاهة ، الالتزام ، التميز و الاحترافية</p>
+                                    <p>{{ $our_value->value }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -161,7 +159,7 @@
                                         <i class="fa fa-cog fa-3x" style="color:#0ea2bd"></i>
                                     </div>
                                     <h4 class="text-center">شعارنا</h4>
-                                    <p class="text-center">حيث الاختيار الآمن</p>
+                                    <p class="text-center"> {{ $our_logo->value }}</p>
                                 </div>
                             </div>
                         </div>
