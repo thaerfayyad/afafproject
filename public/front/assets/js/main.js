@@ -1,9 +1,29 @@
-/**
-* Template Name: HeroBiz - v2.2.0
-* Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+// Start Jquery Custom Code 
+$(document).ready(function(){
+    
+    // Start Owl Carousel ...
+    $(".clients .owl-carousel").owlCarousel({
+      items : 4,
+      margin : 20,
+      loop:true,
+      mouseDrag : true,
+      touchDrag: true,
+      nav : false,
+      rtl: true,
+      dots : false,
+      autoplay : true,
+      autoplayTimeout : 3000,
+  });
+
+
+  $(window).on('scroll' , function(){
+    
+  });
+
+
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
   "use strict";
 

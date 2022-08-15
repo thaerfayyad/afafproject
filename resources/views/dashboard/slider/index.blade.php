@@ -28,7 +28,7 @@
 
 
                                 <!--begin::Add customer-->
-                                <a href="{{ route('teams.create') }}" class="btn btn-primary"
+                                <a href="{{ route('sliders.create') }}" class="btn btn-primary"
                                     data-bs-target="#kt_modal_add_customer"> اضافة </a>
                                 <!--end::Add customer-->
                             </div>

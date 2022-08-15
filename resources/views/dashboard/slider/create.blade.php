@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>اضافة عضو جديد</h2>
+                                            <h2>اضافة  سلايدر جديد</h2>
                                         </div>
                                     </div>
 

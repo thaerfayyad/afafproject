@@ -162,3 +162,5 @@ class TeamController extends Controller
         ], $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 }
+
+ 

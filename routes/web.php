@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\TeamController;
 use App\Http\Controllers\Dashboard\PlanController;
 use App\Http\Controllers\Dashboard\PolicyController;
 use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\FrontController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
@@ -27,23 +28,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('front.index');
-});
-Route::get('/مجلس الادارة', function () {
-    return view('front.team');
-})->name('team');
-
-Route::get('/الجمعية العمومية', function () {
-    return view('front.association');
-})->name('association');
-
-
-Route::get('/xx', function () {
-    return view('front.adminsrations');
-})->name('adminsrations');
-
-
+ Route::get('/',[FrontController::class,'index'])->name('home');
+ Route::get('/jobs',[FrontController::class,'jobs'])->name('jobs');
+ Route::get('/public-associations',[FrontController::class,'publicAssociations'])->name('publicAssociations');
 
 Route::prefix('dashboard')->middleware('guest:admin')->group(function () {
 

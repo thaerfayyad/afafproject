@@ -3,7 +3,7 @@
 
 
 @section('content')
- <section id="hero-fullscreen" class="hero-fullscreen d-flex align-items-center">
+ <section id="hero-fullscreen" class=" administrative hero-fullscreen d-flex align-items-center">
     <div class="container d-flex flex-column align-items-center position-relative" data-aos="zoom-out">
       <h2>الأنظمة الإدارية والسياسات</span></h2>
       <p> اهلا وسهلا .</p>
@@ -18,7 +18,7 @@
         <div class="row gy-4">
 
             <div
-                class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
+                class="col-lg-12 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
 
                 <div class="content px-xl-5">
                     <h3> <strong>الأنظمة الادارية والسياسات</strong></h3>
@@ -33,7 +33,6 @@
                         <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                                <i class="bi bi-question-circle question-icon"></i>
                                 قوائم الإداريين في جمعية العفاف
                             </button>
                         </h3>
@@ -125,7 +124,6 @@
                         <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                                <i class="bi bi-question-circle question-icon"></i>
                                 اللائحة الأساسية والأهداف في جمعية العفاف
                             </button>
                         </h3>
@@ -146,7 +144,6 @@
                         <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                                <i class="bi bi-question-circle question-icon"></i>
                                 التقارير الإدارية والمالية في جمعية العفاف
                             </button>
                         </h3>
@@ -169,14 +166,12 @@
                         <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-                                <i class="bi bi-question-circle question-icon"></i>
                                 السياسات واللوائح في جمعية العفاف
                             </button>
                         </h3>
                         <div id="faq-content-4" class="accordion-collapse collapse"
                             data-bs-parent="#faqlist">
                             <div class="accordion-body">
-                                <i class="bi bi-question-circle question-icon"></i>
                                 Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi.
                                 Id
                                 interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
@@ -191,7 +186,6 @@
                         <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                                <i class="bi bi-question-circle question-icon"></i>
                                 السياسات واللوائح في جمعية قمم الشبابية
                             </button>
                         </h3>

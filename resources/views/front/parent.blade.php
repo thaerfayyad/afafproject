@@ -49,6 +49,22 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('front/assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/assets/css/custom-style.css') }}" rel="stylesheet">
+
+
+    <!-- New Lines  -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Owl Carousel  -->
+    <link href="{{ asset('front/assets/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/assets/css/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/assets/css/owl.theme.default.min.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('front/assets/css/buttons.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/assets/css/task.css') }}" rel="stylesheet">
+
+    @yield('css')
 
     <!-- =======================================================
   * Template Name: HeroBiz - v2.2.0
@@ -61,7 +77,7 @@
 <body>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top" data-scrollto-offset="0">
+    <header id="header" class="header" data-scrollto-offset="0">
         <div class="container-fluid d-flex align-items-center justify-content-between">
 
             <a href="index.html" class="logo d-flex align-items-center scrollto me-auto me-lg-0">
@@ -75,36 +91,37 @@
 
 
 
-                    <li><a class="nav-link scrollto" href="{{  url('') }}">الصفحة الرئيسية</a></li>
-                    <li><a class="nav-link scrollto" href="index.html#services">من نحن</a></li>
+                    {{--  <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'frontend.index' ? 'active' : '' }}" href="{{  url('/') }}">الصفحة الرئيسية</a></li>
+                    {{--  <li><a class="nav-link scrollto  {{ Route::currentRouteName() == 'about-us' ? 'active' : '' }}" href="{{ route('about-us') }}">من نحن</a></li>  --}}   
                     <li class="dropdown"><a href="#"><span>الاجتماعت والشراكات</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="{{ route('team') }}">مجلس الادارة</a></li>
-                            <li><a href="index-2.html" class="active">شركاء الجمعية</a></li>
-                            <li><a href="{{ route('association') }}">الجمعية العمومية</a></li>
-                            <li><a href="{{ route('adminsrations') }}">الأنظمة الادارية والسياسات</a></li>
+                            <li><a href="#" class="{{ Route::currentRouteName() == 'managers' ? 'active' : '' }}">مجلس الادارة</a></li>
+                            <li><a href="{{ route('publicAssociations') }}" class="{{ Route::currentRouteName() == 'general-assembly' ? 'active' : '' }}">الجمعية العمومية</a></li>
+                            <li><a href="#"  class="{{ Route::currentRouteName() == 'adminstrative-systems' ? 'active' : '' }}">الأنظمة الادارية والسياسات</a></li>
                         </ul>
                     </li>
-                    <li><a class="nav-link scrollto" href="index.html#portfolio">المتجر الالكتروني</a></li>
+                    <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'ecommerce' ? 'active' : '' }}" href="#">المتجر الالكتروني</a></li>
                     <li class="dropdown"><a href="#"><span>البرامج</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="#">اللقاءات والدورات </a></li>
-                            <li><a href="#">الاستشارات </a></li>
+                            <li><a class="{{ Route::currentRouteName() == 'meetings.courses.details' ? 'active' : '' }}" href="#">اللقاءات والدورات </a></li>
+                            <li><a class="{{ Route::currentRouteName() == 'consultations' ? 'active' : '' }}" href="#">الاستشارات </a></li>
 
                         </ul>
                     </li>
-                    <li><a class="nav-link scrollto" href="index.html#team">استبيان وقياس</a></li>
-                    <li><a href="blog.html">المركز الاعلامي</a></li>
+                    <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'news' ? 'active' : '' }}" href="#">الاْخبار</a></li>
+                    <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'jobs' ? 'active' : '' }}" href="{{ route('jobs') }}">الوظائف</a></li>
+                    <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'questionnaire' ? 'active' : '' }}" href="#">استبيان وقياس</a></li>
 
 
-                    <li><a class="nav-link scrollto" href="index.html#contact">اتصل بنا</a></li>
+                    <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'terms-conditions' ? 'active' : '' }}" href="#">الشروط والاْحكام</a></li>
+                    <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'contact' ? 'active' : '' }}" href="#">اتصل بنا</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
 
-
+            
 
         </div>
     </header><!-- End Header -->
@@ -127,83 +144,40 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
 
-        <div class="footer-content">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer-info">
-                            <h3>HeroBiz</h3>
-                            <p>
-                                A108 Adam Street <br>
-                                NY 535022, USA<br><br>
-                                <strong>Phone:</strong> +1 5589 55488 55<br>
-                                <strong>Email:</strong> info@example.com<br>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Services</h4>
-                        <ul>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-                            <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
 
         <div class="footer-legal text-center">
             <div
                 class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
 
                 <div class="d-flex flex-column align-items-center align-items-lg-start">
-                    <div class="copyright">
-                        &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
+                    <div class="image">
+                        <img style="width:150px;background-color:#fff;border-radius:25px;padding:10px;margin-bottom:10px" src="{{ asset('front/assets/img/logo.png') }}">
                     </div>
-                    <div class="credits">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
+                    <h3>
+                        جمعية العفاف
+                    </h3>
+                    <br>
+                    <h4><i class="fa fa-envelope fa-fw"></i> info@alafaf.org.sa</h4>
+                    <h4><i class="fa fa-phone fa-fw"></i> 0126177733</h4>
+                    <h4><i class="fa fa-phone fa-fw"></i> 055829995</h4>
                 </div>
 
                 <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+
+                    <h3>التواصل الاْجتماعي</h3>
+                    <br>
+
+                    <a target="_blank" href="https://www.facebook.com/people/%D8%A7%D9%84%D8%B9%D9%81%D8%A7%D9%81-%D8%A7%D9%84%D8%B9%D9%81%D8%A7%D9%81/100056221140571/" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a target="_blank" href="https://twitter.com/AlafafSa" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a target="_blank" href="https://www.youtube.com/channel/UCJWtyQvAjIagNcbj7TnKNOw" class="youtube"><i class="bi bi-youtube"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/alafafsa/" class="instagram"><i class="bi bi-instagram"></i></a>
                 </div>
 
             </div>
+        </div>
+
+        <div class="under-footer">
+
         </div>
 
     </footer><!-- End Footer -->
@@ -214,6 +188,7 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
+    <script src="{{ asset('front/assets/js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('front/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('front/assets/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('front/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
@@ -222,6 +197,7 @@
     <script src="{{ asset('front/assets/vendor/php-email-form/validate.j') }}s"></script>
 
     <!-- Template Main JS File -->
+    <script src="{{ asset('front/assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('front/assets/js/main.js') }}"></script>
 
 </body>
