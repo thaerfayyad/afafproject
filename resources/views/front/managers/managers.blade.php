@@ -22,84 +22,24 @@
         <br><br>
 
         <div class="row">
+
+            @foreach ($items as $item )
             <div class="col-md-3">
                 <div class="manager-box">
                     <div class="image">
                         <img src="{{ asset('front/assets/img/نمغع.webp') }}" alt="">
                     </div>
-                    <h4>ملف الاْجتماع الاْول</h4>
-                    <a href="" class="main-button" style="margin:auto;height:35px">
-                        <span>-- ,</span>
+                    <h4>{{ $item->title }}</h4>
+                    <a href="{{ $item->file_path }}" target="_blank" class="main-button" style="margin:auto;height:35px">
+                        <span>تنزيل</span>
                         <span></span>
                         <span></span>
                     </a>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="manager-box">
-                    <div class="image">
-                        <img src="{{ asset('front/assets/img/نمغع.webp') }}" alt="">
-                    </div>
-                    <h4>ملف الاْجتماع الاْول</h4>
-                    <a href="" class="main-button" style="margin:auto;height:35px">
-                        <span>-- ,</span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="manager-box">
-                    <div class="image">
-                        <img src="{{ asset('front/assets/img/نمغع.webp') }}" alt="">
-                    </div>
-                    <h4>ملف الاْجتماع الاْول</h4>
-                    <a href="" class="main-button" style="margin:auto;height:35px">
-                        <span>-- ,</span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="manager-box">
-                    <div class="image">
-                        <img src="{{ asset('front/assets/img/نمغع.webp') }}" alt="">
-                    </div>
-                    <h4>ملف الاْجتماع الاْول</h4>
-                    <a href="" class="main-button" style="margin:auto;height:35px">
-                        <span>-- ,</span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="manager-box">
-                    <div class="image">
-                        <img src="{{ asset('front/assets/img/نمغع.webp') }}" alt="">
-                    </div>
-                    <h4>ملف الاْجتماع الاْول</h4>
-                    <a href="" class="main-button" style="margin:auto;height:35px">
-                        <span>-- ,</span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="manager-box">
-                    <div class="image">
-                        <img src="{{ asset('front/assets/img/نمغع.webp') }}" alt="">
-                    </div>
-                    <h4>ملف الاْجتماع الاْول</h4>
-                    <a href="" class="main-button" style="margin:auto;height:35px">
-                        <span>-- ,</span>
-                        <span></span>
-                        <span></span>
-                    </a>
-                </div>
-            </div>
+            @endforeach
+
+
         </div>
 
     </div>

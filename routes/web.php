@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AchievementController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\AdminstrativeController;
 use App\Http\Controllers\Dashboard\CoursesController;
 use App\Http\Controllers\Dashboard\FinanciallyController;
 use App\Http\Controllers\Dashboard\JobController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Dashboard\TeamController;
 use App\Http\Controllers\Dashboard\PlanController;
 use App\Http\Controllers\Dashboard\PolicyController;
 use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\TargetController;
 use App\Http\Controllers\FrontController;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +32,12 @@ use Illuminate\Support\Facades\Route;
 
  Route::get('/',[FrontController::class,'index'])->name('home');
  Route::get('/jobs',[FrontController::class,'jobs'])->name('jobs');
+ Route::get('/manager',[FrontController::class,'manager'])->name('manager');
+ Route::get('/team-Details',[FrontController::class,'teamDetails'])->name('teamDetails');
+ Route::get('/courses',[FrontController::class,'courses'])->name('courses');
+ Route::get('/coursesDetails/{id}',[FrontController::class,'coursesDetails'])->name('coursesDetails');
+ Route::get('/adminstrative',[FrontController::class,'adminstrative'])->name('adminstrative');
+ 
  Route::get('/public-associations',[FrontController::class,'publicAssociations'])->name('publicAssociations');
 
 Route::prefix('dashboard')->middleware('guest:admin')->group(function () {
@@ -54,6 +62,8 @@ Route::prefix('dashboard')->middleware('auth:admin') ->group(function () {
     Route::resource('jobs',  JobController::class);
     Route::resource('policies',  PolicyController::class);
     Route::resource('sliders',  SliderController::class);
+    Route::resource('adminstratives',  AdminstrativeController::class);
+    Route::resource('targets',  TargetController::class);
 
 
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');

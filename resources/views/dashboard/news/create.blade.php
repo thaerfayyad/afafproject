@@ -41,6 +41,12 @@
                                             </div>
                                             <div class="col-md-4 col-sm-12 mt-8">
 
+                                                <label for="title" class="form-label required">الخبر</label>
+                                                <textarea name="descriptions" id="descriptions" class="form-control form-control-solid" cols="30" rows="5"></textarea>
+                                            </div>
+
+                                            <div class="col-md-4 col-sm-12 mt-8">
+
 
                                                     <!--begin::Image input-->
                                                     <div class="image-input image-input-empty" data-kt-image-input="true"
@@ -84,27 +90,6 @@
                                                     <!--end::Image input-->
 
                                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            <label> الخبر</label>
-                                            <label><strong>Description :</strong></label>
-
-                                            <textarea name="kt_docs_ckeditor_classic" id="kt_docs_ckeditor_classic">
-                                            </textarea>
 
 
 

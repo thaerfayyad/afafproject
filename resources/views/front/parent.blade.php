@@ -55,7 +55,7 @@
     <!-- New Lines  -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Owl Carousel  -->
     <link href="{{ asset('front/assets/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('front/assets/css/owl.carousel.min.css') }}" rel="stylesheet">
@@ -91,14 +91,14 @@
 
 
 
-                    {{--  <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'frontend.index' ? 'active' : '' }}" href="{{  url('/') }}">الصفحة الرئيسية</a></li>
-                    {{--  <li><a class="nav-link scrollto  {{ Route::currentRouteName() == 'about-us' ? 'active' : '' }}" href="{{ route('about-us') }}">من نحن</a></li>  --}}   
+                       <l><a class="nav-link scrollto {{ Route::currentRouteName() == 'frontend.index' ? 'active' : '' }}" href="{{  url('') }}">الصفحة الرئيسية</a></l>
+                     <li><a class="nav-link scrollto  {{ Route::currentRouteName() == 'about-us' ? 'active' : '' }}" href="#">من نحن</a></li>
                     <li class="dropdown"><a href="#"><span>الاجتماعت والشراكات</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="#" class="{{ Route::currentRouteName() == 'managers' ? 'active' : '' }}">مجلس الادارة</a></li>
+                            <li><a href="{{ route('manager') }}" class="{{ Route::currentRouteName() == 'managers' ? 'active' : '' }}">مجلس الادارة</a></li>
                             <li><a href="{{ route('publicAssociations') }}" class="{{ Route::currentRouteName() == 'general-assembly' ? 'active' : '' }}">الجمعية العمومية</a></li>
-                            <li><a href="#"  class="{{ Route::currentRouteName() == 'adminstrative-systems' ? 'active' : '' }}">الأنظمة الادارية والسياسات</a></li>
+                            <li><a href="{{ route('adminstrative') }}"  class="{{ Route::currentRouteName() == 'adminstrative-systems' ? 'active' : '' }}">الأنظمة الادارية والسياسات</a></li>
                         </ul>
                     </li>
                     <li><a class="nav-link scrollto {{ Route::currentRouteName() == 'ecommerce' ? 'active' : '' }}" href="#">المتجر الالكتروني</a></li>
@@ -121,7 +121,7 @@
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
 
-            
+
 
         </div>
     </header><!-- End Header -->

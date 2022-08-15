@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title', 'اجتماعات مجلس الادارة في جمعية قمم الشبابية' )
+@section('title', ' قائمة الادراية  ' )
 @section('css')
 @section('content')
 
@@ -27,7 +27,7 @@
                                     <!--begin::Card header-->
                                     <div class="card-header">
                                         <div class="card-title">
-                                            <h2>اضافة اجتماعات مجلس الادارة في جمعية    عفاف الشبابية</h2>
+                                            <h2>اضافة   الادارية</h2>
                                         </div>
                                     </div>
 
@@ -38,62 +38,14 @@
                                                 <label for="title" class="form-label required"> العنوان  </label>
                                                 <input type="text" class="form-control form-control-solid" id="title"
                                                     name="title">
-
                                             </div>
-
-
                                             <div class="col-md-4 col-sm-12 mt-8">
 
-                                                <label for="file" class="form-label required"> الملف المرفق</label>
+                                                <label for="file" class="form-label required"> الملف  </label>
                                                 <input type="file" class="form-control form-control-solid" id="file"
                                                     name="file">
-
                                             </div>
-                                            <div class="col-md-3 col-sm-12 mt-6">
-
-
-                                                <!--begin::Image input-->
-                                                <div class="image-input image-input-empty" data-kt-image-input="true"
-                                                    style="background-image: url({{asset('assets/media/avatars/blank.png')}})">
-                                                    <!--begin::Image preview wrapper-->
-                                                    <div class="image-input-wrapper w-125px h-125px"></div>
-                                                    <!--end::Image preview wrapper-->
-
-                                                    <!--begin::Edit button-->
-                                                    <label
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                        data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="اضافة صورة">
-                                                        <i class="bi bi-pencil-fill fs-7"></i>
-
-                                                        <!--begin::Inputs-->
-                                                        <input type="file" id="image" name="image" accept=".png, .jpg, .jpeg" />
-                                                        <input type="hidden" name="avatar_remove" />
-                                                        <!--end::Inputs-->
-                                                    </label>
-                                                    <!--end::Edit button-->
-
-                                                    <!--begin::Cancel button-->
-                                                    <span
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                        data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Cancel avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                                    <!--end::Cancel button-->
-
-                                                    <!--begin::Remove button-->
-                                                    <span
-                                                        class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                                        data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                                        data-bs-dismiss="click" title="Remove avatar">
-                                                        <i class="bi bi-x fs-2"></i>
-                                                    </span>
-                                                    <!--end::Remove button-->
-                                                </div>
-                                                <!--end::Image input-->
-
-                                            </div>
+                                        
 
                                         </div>
                                     </div>
@@ -156,7 +108,7 @@
     <script>
         function store() {
             let formData = new FormData($('#create-form')[0]);
-            axios.post('/dashboard/meetings', formData, {
+            axios.post('/dashboard/adminstratives', formData, {
             }).then(function (response) {
                 console.log(response);
                 toastr.success(response.data.message);

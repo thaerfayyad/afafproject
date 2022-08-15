@@ -44,90 +44,26 @@
             <div class="courses-box">
                 
                 <div class="row">
+
+                    @foreach ($courses as $course)
+                        
+                    @endforeach
                     <div class="col-xl-4 col-lg-6 col-sm-12">
                         <div class="course-box">
                             <div class="image">
-                                <img src="{{ asset('front/assets/img/1912.i109.028_meeting_room_isometric_set-05.jpg') }}" alt="">
+                                <img src="{{$course->image_path }}" alt="">
                             </div>
-                            <h4>عنوان الكورس</h4>
-                            <p>نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس</p>
-                            <a href="{{ route('course.details') }}" class="main-button">
+                            <h4>{{ $course->title }}</h4>
+                            <p>{{ $course->descriptions }}</p>
+                            <a href="{{ route('coursesDetails',$course->id) }}" class="main-button">
                                 <span>تفاصيل الدورة</span>
                                 <span></span>
                                 <span></span>
                             </a>
                         </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12">
-                        <div class="course-box">
-                            <div class="image">
-                                <img src="{{ asset('front/assets/img/1912.i109.028_meeting_room_isometric_set-05.jpg') }}" alt="">
-                            </div>
-                            <h4>عنوان الكورس</h4>
-                            <p>نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس</p>
-                            <a href="{{ route('course.details') }}" class="main-button">
-                                <span>تفاصيل الدورة</span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12">
-                        <div class="course-box">
-                            <div class="image">
-                                <img src="{{ asset('front/assets/img/1912.i109.028_meeting_room_isometric_set-05.jpg') }}" alt="">
-                            </div>
-                            <h4>عنوان الكورس</h4>
-                            <p>نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس</p>
-                            <a href="{{ route('course.details') }}" class="main-button">
-                                <span>تفاصيل الدورة</span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12">
-                        <div class="course-box">
-                            <div class="image">
-                                <img src="{{ asset('front/assets/img/1912.i109.028_meeting_room_isometric_set-05.jpg') }}" alt="">
-                            </div>
-                            <h4>عنوان الكورس</h4>
-                            <p>نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس</p>
-                            <a href="{{ route('course.details') }}" class="main-button">
-                                <span>تفاصيل الدورة</span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12">
-                        <div class="course-box">
-                            <div class="image">
-                                <img src="{{ asset('front/assets/img/1912.i109.028_meeting_room_isometric_set-05.jpg') }}" alt="">
-                            </div>
-                            <h4>عنوان الكورس</h4>
-                            <p>نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس</p>
-                            <a href="{{ route('course.details') }}" class="main-button">
-                                <span>تفاصيل الدورة</span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-sm-12">
-                        <div class="course-box">
-                            <div class="image">
-                                <img src="{{ asset('front/assets/img/1912.i109.028_meeting_room_isometric_set-05.jpg') }}" alt="">
-                            </div>
-                            <h4>عنوان الكورس</h4>
-                            <p>نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس نبذه مختصره عن الكورس</p>
-                            <a href="{{ route('course.details') }}" class="main-button">
-                                <span>تفاصيل الدورة</span>
-                                <span></span>
-                                <span></span>
-                            </a>
-                        </div>
-                    </div>
+                    </div>   
+               
+                    
                 </div>
 
             </div>

@@ -7,13 +7,16 @@
                 <div style="width:10%;float:right;margin-top:10px">
                     <span>اْخر الاْخبار</span>
                 </div>
-                <div style="width:90%;float:left">
-                    <marquee style="width:100%;padding:10px;background-color:#fff;border-bottom:2px solid #cb3434"
-                        behavior=scroll direction="right" scrollamount="5">
-                        الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار
-                        الاْخبار الاْخبار الاْخبار الاْخبار الاْخبار
-                    </marquee>
-                </div>
+                  <div style="width:90%;float:left">
+                  
+                    
+                            <marquee style="width:100%;padding:10px;background-color:#fff;border-bottom:2px solid #cb3434"
+                                behavior=scroll direction="right" scrollamount="5">
+                            جمعية العفاف للتوفيق بين الراغبين في الزواج
+                            </marquee>
+                    
+                       
+                 </div>
                 <div class="clear-both"></div>
             </div>
             <!-- <hr style="width:100%;height:4px;color:#cb3434;background-color:#cb3434"> -->
@@ -93,26 +96,7 @@
                     <h4>الخبر الاْول</h4>
                     <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
                 </div>
-                <div class="box">
-                    <h4>الخبر الاْول</h4>
-                    <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
-                </div>
-                <div class="box">
-                    <h4>الخبر الاْول</h4>
-                    <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
-                </div>
-                <div class="box">
-                    <h4>الخبر الاْول</h4>
-                    <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
-                </div>
-                <div class="box">
-                    <h4>الخبر الاْول</h4>
-                    <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
-                </div>
-                <div class="box">
-                    <h4>الخبر الاْول</h4>
-                    <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
-                </div>
+              
             </div>
         </div>
     </section> -->
@@ -243,27 +227,27 @@
 
                 <div class="row gy-5">
                 @foreach ($teams as $team )
-                <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="team-member">
-                        <div class="member-img" style="width:100%">
-                            <img style="width:100%" src="{{ $team->image_path }}" class=""
-                                alt="">
+                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="team-member">
+                            <div class="member-img" style="width:100%">
+                                <img style="width:100%" src="{{ $team->image_path }}" class=""
+                                    alt="">
+                            </div>
+                            <div class="member-info">
+                                <h4>{{ $team->name }}</h4>
+                                <span>{{ $team->position }}</span>
+                            </div>
                         </div>
-                        <div class="member-info">
-                            <h4>{{ $team->name }}</h4>
-                            <span>{{ $team->position }}</span>
-                        </div>
-                    </div>
-                </div><!-- End Team Member -->
+                    </div><!-- End Team Member -->
 
 
                 @endforeach
-                  
 
-                 
+
+
                 </div>
 
-                <a href="#" class="main-button">
+                <a href="{{ route('teamDetails') }}" class="main-button">
                     <span>عرض المزيد</span>
                     <span></span>
                     <span></span>
@@ -273,51 +257,80 @@
         </section><!-- End Team Section -->
 
         <!-- ======= Services Section ======= -->
-        <section id="services" style="background-color:#0ea2bd;color:#fff" class="services">
+        <section id="services"  style="background-color:#0ea2bd;color:#fff" class="services">
             <div class="container" data-aos="fade-up">
-
+    
                 <div class="section-header mb-3">
                     <h1>اللقاءات والدورات</h1>
                     <!-- <h6> البرامج والدورات التي تقدمها الجمعية </> -->
                 </div>
-
+    
                 <div class="row gy-5 mt-4">
-
-                    @foreach ($courses as $course)
-                        
-                    @endforeach
-
+    
                     <div class="col-xl-4 col-md-6 mt-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="service-item">
                             <div class="img">
-                                <img src="{{ $course->image_path }}" class="img-fluid" alt="">
+                                <img src="assets/img/services-3.jpg" class="img-fluid" alt="">
                             </div>
                             <div class="details position-relative">
                                 <div class="icon">
                                     <i class="bi bi-heart-half"></i>
                                 </div>
                                 <a href="#" class="stretched-link">
-                                    <h3> {{ $course->title }}</h3>
+                                    <h3>اختيار شريك الحياة</h3>
                                 </a>
-                                <p style="color:#333">{{ $course->descriptions }}</p>
+                                <p style="color:#333">تقدم خدمة اختيار شريك الحياة ومساعدة الشخص على الاختيار المناسب</p>
                             </div>
                         </div>
                     </div><!-- End Service Item -->
-
-           
-            
-
+    
+                    <div class="col-xl-4 col-md-6 mt-6" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="service-item">
+                            <div class="img">
+                                <img src="assets/img/services-2.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div class="details position-relative">
+                                <div class="icon">
+                                    <i class="bi bi-file-earmark-play-fill"></i>
+                                </div>
+                                <a href="#" class="stretched-link">
+                                    <h3>دورة العمل الجماعي</h3>
+                                </a>
+                                <p style="color:#333">تساعد الشباب الجمعية على اكتساب مهارة العمل الجماعي </p>
+                            </div>
+                        </div>
+                    </div><!-- End Service Item -->
+    
+                    <div class="col-xl-4 col-mt-6" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="service-item mt-2">
+                            <div class="img">
+                                <img src="assets/img/services-1.jpg" class="img-fluid" alt="">
+                            </div>
+                            <div class="details position-relative">
+                                <div class="icon">
+                                    <i class="bi bi-diagram-3-fill"></i>
+                                </div>
+                                <a href="#" class="stretched-link">
+                                    <h3>دورة التطوع</h3>
+                                </a>
+                                <p style="color:#333"> تقدم خدمة التطوع والارشاد</p>
+                            </div>
+                        </div>
+                    </div><!-- End Service Item -->
+    
+    
+    
                 </div>
-
-                <a href="#" class="main-button">
+    
+                <a href="{{ route('courses') }}" class="main-button">
                     <span>عرض المزيد</span>
                     <span></span>
                     <span></span>
                 </a>
-
+    
             </div>
         </section><!-- End Services Section -->
-
+    
 
         <!-- ======= Clients Section ======= -->
         <section id="clients" class="clients">
