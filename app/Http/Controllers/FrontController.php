@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Achievement;
 use App\Models\Adminstrative;
+use App\Models\Conditions;
 use App\Models\Contact;
 use App\Models\Courses;
 use App\Models\Document;
@@ -145,12 +146,7 @@ class FrontController extends Controller
         $contact->save();
         return redirect()->back();
     }
-    public function docment()
-    {
-        $url = Document::where('key', 'url')->first();
 
-        return view('front.parent', compact('url'));
-    }
 
     public function questionnaire()
     {
@@ -162,5 +158,23 @@ class FrontController extends Controller
     {
 
         return view('front.consultations.consultations' );
+    }
+    public function conditions()
+    {
+        $conditions = Conditions::all();
+
+        return view('front.terms_conditions.terms-conditions',compact('conditions'));
+    }
+    public function about()
+    {
+
+
+        $our_vision = Document::where('key', 'vision')->first();
+        $who_us = Document::where('key', 'who-us')->first();
+        $message = Document::where('key', 'message')->first();
+        $our_value = Document::where('key', 'our_value')->first();
+        $our_logo = Document::where('key', 'logo')->first();
+
+        return view('front.about.about', compact(  'our_vision', 'who_us', 'message', 'our_value', 'our_logo'));
     }
 }

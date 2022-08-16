@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Conditions;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -89,7 +90,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         //
-         
+
         $imageName = $contact->value;
         $deleted = $contact->delete();
         if ($deleted) Storage::disk('public')->delete($imageName);

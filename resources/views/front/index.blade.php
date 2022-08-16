@@ -7,16 +7,13 @@
                 <div style="width:10%;float:right;margin-top:10px">
                     <span>اْخر الاْخبار</span>
                 </div>
-                  <div style="width:90%;float:left">
-                  
-                    
-                            <marquee style="width:100%;padding:10px;background-color:#fff;border-bottom:2px solid #cb3434"
-                                behavior=scroll direction="right" scrollamount="5">
-                            جمعية العفاف للتوفيق بين الراغبين في الزواج
-                            </marquee>
-                    
-                       
-                 </div>
+                 <div style="width:90%;float:left">
+                <marquee style="width:100%;padding:10px;background-color:#fff;border-bottom:2px solid #cb3434" behavior=scroll direction="right" scrollamount="5">
+                    @foreach($news as $new)
+                        {{ $new->title }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    @endforeach
+                </marquee>
+            </div>
                 <div class="clear-both"></div>
             </div>
             <!-- <hr style="width:100%;height:4px;color:#cb3434;background-color:#cb3434"> -->
@@ -96,7 +93,7 @@
                     <h4>الخبر الاْول</h4>
                     <p>الخبر الاْول الخبر الاْولالخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول الخبر الاْول</p>
                 </div>
-              
+
             </div>
         </div>
     </section> -->
@@ -257,14 +254,14 @@
         <!-- ======= Services Section ======= -->
         <section id="services"  style="background-color:#0ea2bd;color:#fff" class="services">
             <div class="container" data-aos="fade-up">
-    
+
                 <div class="section-header mb-3">
                     <h1>اللقاءات والدورات</h1>
                     <!-- <h6> البرامج والدورات التي تقدمها الجمعية </> -->
                 </div>
-    
+
                 <div class="row gy-5 mt-4">
-    
+
                     <div class="col-xl-4 col-md-6 mt-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="service-item">
                             <div class="img">
@@ -281,7 +278,7 @@
                             </div>
                         </div>
                     </div><!-- End Service Item -->
-    
+
                     <div class="col-xl-4 col-md-6 mt-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="service-item">
                             <div class="img">
@@ -298,7 +295,7 @@
                             </div>
                         </div>
                     </div><!-- End Service Item -->
-    
+
                     <div class="col-xl-4 col-mt-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="service-item mt-2">
                             <div class="img">
@@ -315,20 +312,20 @@
                             </div>
                         </div>
                     </div><!-- End Service Item -->
-    
-    
-    
+
+
+
                 </div>
-    
+
                 <a href="{{ route('courses') }}" class="main-button">
                     <span>عرض المزيد</span>
                     <span></span>
                     <span></span>
                 </a>
-    
+
             </div>
         </section><!-- End Services Section -->
-    
+
 
         <!-- ======= Clients Section ======= -->
         <section id="clients" class="clients">
